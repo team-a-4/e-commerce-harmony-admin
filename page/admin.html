@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+    <title>Admin Panel</title>
+</head>
+<body>
+    <main class="container">
+        <h2>Add Product</h2>
+        <form action="add_product.php" method="post">
+            <input type="text" name="name" placeholder="Product Name">
+            <input type="number" name="cost" placeholder="Product Cost">
+            <textarea name="description" placeholder="Product Description"></textarea>
+            <select id="category" name="category">
+                <option value="" disabled selected>Select Category</option>
+                <option value="Straws">Straws</option>
+                <option value="Plates">Plates</option>
+                <option value="Utensils">Utensils</option>
+                <option value="Cups">Cups</option>
+                <option value="Bags">Bags</option>
+            </select>
+            <input type="file" name="image" >
+            <input type="submit" value="Add Product">
+        </form>
+    </main>
+    <footer>
+        <main class="container">
+            <p>Copyright &copy; 2023 Ecommerce Website</p>
+        </main>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,4 @@
+textarea[name="description"] {
+    min-height: 150px;
+    resize: vertical;
+}
