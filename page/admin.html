@@ -4,27 +4,100 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Home</title>
+    <style>
+        textarea[name="description"] {
+            min-height: 150px;
+            resize: vertical;
+        }
 
-    <title>Admin Panel</title>
+        .date-fields-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .field-label {
+            font-weight: bold;
+            width: 200px;
+        }
+        
+
+        .date-fields-container {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .date-fields-container label {
+            width: auto;
+        }
+    </style>
 </head>
 <body>
     <main class="container">
         <h2>Add Product</h2>
         <form action="add_product.php" method="post">
-            <input type="text" name="name" placeholder="Product Name">
-            <input type="number" name="cost" placeholder="Product Cost">
-            <textarea name="description" placeholder="Product Description"></textarea>
-            <select id="category" name="category">
-                <option value="" disabled selected>Select Category</option>
-                <option value="Straws">Straws</option>
-                <option value="Plates">Plates</option>
-                <option value="Utensils">Utensils</option>
-                <option value="Cups">Cups</option>
-                <option value="Bags">Bags</option>
-            </select>
-            <input type="file" name="image" >
-            <input type="submit" value="Add Product">
+            <div class="field-container">
+                <label class="field-label" for="brand">Brand Name:</label>
+                <input type="text" name="brand" id="brand">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="name">Product Name:</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Straws">Straws</option>
+                    <option value="Plates">Plates</option>
+                    <option value="Utensils">Utensils</option>
+                    <option value="Cups">Cups</option>
+                    <option value="Bags">Bags</option>
+                </select>
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="weight">Weight (g):</label>
+                <input type="number" name="weight" id="weight" min="0">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="barcode">Barcode:</label>
+                <input type="text" name="barcode" id="barcode">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="quantity">Quantity:</label>
+                <input type="number" name="quantity" id="quantity" min="0">
+            </div>
+            <div class="field-container date-fields-container">
+                <label class="field-label" for="productionDate">Prod Date:</label>
+                <input type="date" name="productionDate" id="productionDate">
+                <label class="field-label" for="expiryDate">Exp Date:</label>
+                <input type="date" name="expiryDate" id="expiryDate">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="cost">Product Cost:</label>
+                <input type="number" name="cost" id="cost" min="0">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="sellingPrice">Selling Price:</label>
+                <input type="number" name="sellingPrice" id="sellingPrice" min="0">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="discount">% Discount:</label>
+                <input type="number" name="discount" id="discount" min="0" max="100">
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="description">Product Description:</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div class="field-container">
+                <label class="field-label" for="image">Product Image:</label>
+                <input type="file" name="image" id="image">
+            </div>
+            <input type="submit" value="Add Product" id="submitBtn">
         </form>
     </main>
     <footer>
@@ -32,5 +105,52 @@
             <p>Copyright &copy; 2023 Ecommerce Website</p>
         </main>
     </footer>
+    <script>
+        const submitButton = document.getElementById('submitBtn');
+
+        submitButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            const inputFields = document.querySelectorAll('input, textarea');
+            inputFields.forEach(inputField => {
+                inputField.value = '';
+            });
+
+            // Capture values from input fields
+            const brand = document.getElementById('brand').value;
+            const name = document.getElementById('name').value;
+            const category = document.getElementById('category').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const barcode = document.getElementById('barcode').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const productionDate = document.getElementById('productionDate').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cost = parseFloat(document.getElementById('cost').value);
+            const sellingPrice = parseFloat(document.getElementById('sellingPrice').value);
+            const discount = parseFloat(document.getElementById('discount').value);
+            const description = document.getElementById('description').value;
+            const image = document.getElementById('image').files[0]; // Capture the selected file
+
+            // Now you can use these variables to further process or send data
+            console.log('Brand Name:', brand);
+            console.log('Product Name:', name);
+            console.log('Category:', category);
+            console.log('Weight (g):', weight);
+            console.log('Barcode:', barcode);
+            console.log('Quantity:', quantity);
+            console.log('Production Date:', productionDate);
+            console.log('Expiry Date:', expiryDate);
+            console.log('Product Cost:', cost);
+            console.log('Selling Price:', sellingPrice);
+            console.log('% Discount:', discount);
+            console.log('Product Description:', description);
+            console.log('Selected Image:', image);
+
+            // You can add further logic here, like sending the data to a server using AJAX or Fetch
+
+            // Display a successful popup
+            alert('Successful');
+        });
+    </script>
 </body>
 </html>
