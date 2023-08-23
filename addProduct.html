@@ -21,7 +21,7 @@
               name="productName"
               placeholder="Product Name"
               required
-              onchange="checkProductName(this.value)"
+              onchange="checkProductName()"
             />
           </label>
 
@@ -33,6 +33,7 @@
               name="brandName"
               placeholder="Brand Name"
               required
+              onchange="checkProductName()"
             />
           </label>
         </div>
@@ -76,15 +77,55 @@
   </body>
 
   <script>
-    function checkProductName(productName) {
-      var productName = productName;
-      var submitBtn = document.getElementById("submitBtn");
+    function checkProductName() {
+      var productNameField = document.getElementById("productName");
+      var brandNameField = document.getElementById("brandName");
 
-      if (productName == "Straws") {
-        submitBtn.disabled = true;
-      } else {
-        submitBtn.disabled = false;
-      }
+      var productName = productNameField.value;
+      var brandName = brandNameField.value;
+
+      if (productName == "" || brandName == "") return;
+
+      var submitBtn = document.getElementById("submitBtn");
+      var http_request = new XMLHttpRequest();
+
+      http_request.open(
+        "GET",
+        "checkProduct.php?productName=" +
+          productName +
+          "&brandName=" +
+          brandName,
+        true
+      );
+
+      http_request.onreadystatechange = function () {
+        if (http_request.readyState == 4) {
+          if (http_request.status == 200) {
+            var xmlResponse = http_request.responseXML;
+            var status = xmlResponse
+              .getElementsByTagName("status")[0]
+              .getAttribute("exists");
+
+            if (status == "true") {
+              productNameField.setAttribute("aria-invalid", "true");
+              brandNameField.setAttribute("aria-invalid", "true");
+
+              submitBtn.value = "Product Already Exists";
+              submitBtn.disabled = true;
+            } else {
+              productNameField.setAttribute("aria-invalid", "false");
+              brandNameField.setAttribute("aria-invalid", "false");
+
+              submitBtn.value = "Add Product";
+              submitBtn.disabled = false;
+            }
+          } else {
+            alert("An error has occured making the request");
+          }
+        }
+      };
+
+      http_request.send(null);
     }
   </script>
 </html>

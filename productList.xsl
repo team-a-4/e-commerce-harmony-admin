@@ -5,43 +5,67 @@
             <head>
                 <link rel="stylesheet"
                     href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"></link>
-                <title>Product Information</title>
+                <title>Inventory</title>
             </head>
             <body>
-                <h1>Product Information</h1>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>AverageBP</th>
-                        <th>AverageSP</th>
-                    </tr>
-                    <xsl:apply-templates select="//product" />
-                </table>
+                <main class="container">
+                    <div class="grid">
+                        <div>
+                            <h1>Inventory</h1>
+                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div>
+                            <button onclick="location.href='./addProduct.html'">Add Product</button>
+                        </div>
+                    </div>
+                    <table role="grid">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Brand</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Average Buying Price</th>
+                                <th scope="col">Average Selling Price</th>
+                            </tr>
+                        </thead>
+                        <xsl:apply-templates select="products" />
+                    </table>
+                </main>
             </body>
         </html>
     </xsl:template>
 
-    <xsl:template match="product">
-        <tr>
-            <td>
-                <xsl:value-of select="@productId" />
-            </td>
-            <td>
-                <xsl:value-of select="name" />
-            </td>
-            <td>
-                <xsl:value-of select="sum(stock/inventory/quantity)" />
-            </td>
-            <td>
-                <xsl:value-of select="format-number(avg(stock/inventory/pricing/costPrice), '0.00')" />
-            </td>
-            <td>
-                <xsl:value-of
-                    select="format-number(avg(stock/inventory/pricing/sellingPrice), '0.00')" />
-            </td>
-        </tr>
+    <xsl:template match="products">
+        <tbody>
+            <xsl:for-each select="product">
+                <tr>
+                    <td>
+                        <a href="./product.xml">
+                            <xsl:value-of select="@productId" />
+                        </a>
+                    </td>
+                    <td>
+                        <xsl:value-of select="name" />
+                    </td>
+                    <td>
+                        <xsl:value-of select="brand" />
+                    </td>
+                    <td>
+                        <xsl:value-of select="sum(stock/inventory/quantity)" />
+                    </td>
+                    <td>
+                        <xsl:value-of
+                            select="format-number(sum(stock/inventory/pricing/costPrice) div count(stock/inventory), '0.00')" />
+                    </td>
+                    <td>
+                        <xsl:value-of
+                            select="format-number(sum(stock/inventory/pricing/sellingPrice) div count(stock/inventory), '0.00')" />
+                    </td>
+                </tr>
+            </xsl:for-each>
+        </tbody>
     </xsl:template>
-
 </xsl:stylesheet>

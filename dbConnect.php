@@ -2,7 +2,7 @@
 $strHost = "localhost";
 $strUser = "root";
 $strPass = "";
-$strDb = "Harmony";
+$strDb = "harmony_2";
 
 // open connection
 $con = mysqli_connect($strHost, $strUser, $strPass, $strDb);

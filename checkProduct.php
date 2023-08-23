@@ -1,16 +1,19 @@
 <?php
-$productName=$_GET["productName"];
+header("Content-type: text/xml");
+$productName = $_GET["productName"];
+$brandName = $_GET["brandName"];
 
 require("dbConnect.php");
-$sql = "SELECT * FROM Products WHERE ProductName = ''' . $productName . '''";
+
+$sql = "SELECT * FROM products WHERE product_name = '" . $productName . "' AND product_brand = '" . $brandName . "'";
 
 $result = mysqli_query($con, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    echo "Product already exists";
+    echo '<?xml version="1.0" encoding="UTF-8"?><status exists = "true" />';
 } else {
-    echo "Product does not exist";
+    echo '<?xml version="1.0" encoding="UTF-8"?><status exists = "false" />';
 }
-mysqli_close($con);
 
+mysqli_close($con);
 ?>
