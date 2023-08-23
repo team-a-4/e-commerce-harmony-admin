@@ -26,9 +26,10 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Brand</th>
-                                <th scope="col">Quantity</th>
+                                <th scope="col">Quantity/Weight</th>
                                 <th scope="col">Average Buying Price</th>
                                 <th scope="col">Average Selling Price</th>
+                                <th scope="col">Inventory Entries</th>
                             </tr>
                         </thead>
                         <xsl:apply-templates select="products" />
@@ -63,6 +64,9 @@
                     <td>
                         <xsl:value-of
                             select="format-number(sum(stock/inventory/pricing/sellingPrice) div count(stock/inventory), '0.00')" />
+                    </td>
+                    <td>
+                        <xsl:value-of select="count(stock/inventory)" />
                     </td>
                 </tr>
             </xsl:for-each>
