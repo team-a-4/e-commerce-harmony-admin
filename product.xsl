@@ -168,7 +168,7 @@
             <td>
                 <xsl:value-of select="pricing/sellingPrice" />
             </td>
-            <!-- if profit > 0 set color to green else red -->
+
             <td>
                 <xsl:choose>
                     <xsl:when test="pricing/sellingPrice - pricing/costPrice &gt; 0">
