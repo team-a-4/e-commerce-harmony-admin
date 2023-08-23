@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+   <xs:element name="product">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="brand" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+
+                <xs:element name="image">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="type" type="xs:string"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="stock">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="inventory" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="productBarcode" type="xs:string"/>
+
+                                        <xs:choice>
+                                            <xs:element name="quantity" minOccurs="0">
+                                                <xs:complexType>
+                                                    <xs:simpleContent>
+                                                        <xs:extension base="xs:int">
+                                                            <xs:attribute name="unit"
+                                                                type="xs:string" />
+                                                        </xs:extension>
+                                                    </xs:simpleContent>
+                                                </xs:complexType>
+                                            </xs:element>
+
+                                            <xs:element name="weight" minOccurs="0">
+                                                <xs:complexType>
+                                                    <xs:simpleContent>
+                                                        <xs:extension base="xs:double">
+                                                            <xs:attribute name="unit" type="xs:string"/>
+                                                        </xs:extension>
+                                                    </xs:simpleContent>
+                                                </xs:complexType>
+                                            </xs:element>
+
+                                        </xs:choice>
+
+                                        <xs:element name="productionDate" type="xs:date"/>
+                                        <xs:element name="expiryDate" type="xs:date"/>
+                                        <xs:element name="pricing">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="costPrice" type="xs:decimal"/>
+                                                    <xs:element name="sellingPrice" type="xs:decimal"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="inventoryId" type="xs:string"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+
+            <xs:attribute name="productId" type="xs:string"/>
+            <xs:attribute name="category" type="xs:string"/>
+
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
