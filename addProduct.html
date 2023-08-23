@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <title>Add Product</title>
+  </head>
+  <body>
+    <main class="container">
+      <h2>Add Product</h2>
+      <form>
+        <div class="grid">
+          <label for="productName">
+            Product Name
+            <input
+              type="text"
+              id="productName"
+              name="productName"
+              placeholder="Product Name"
+              required
+              onchange="checkProductName(this.value)"
+            />
+          </label>
+
+          <label for="brandName">
+            Brand Name
+            <input
+              type="text"
+              id="brandName"
+              name="brandName"
+              placeholder="Brand Name"
+              required
+            />
+          </label>
+        </div>
+
+        <label for="category">
+          Category
+          <select id="category" name="category">
+            <option value="Straws">Straws</option>
+            <option value="Plates">Plates</option>
+            <option value="Utensils">Utensils</option>
+            <option value="Cups">Cups</option>
+            <option value="Bags">Bags</option>
+          </select>
+        </label>
+
+        <label for="description">
+          Description
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Product Description"
+          ></textarea>
+        </label>
+
+        <label for="thumbnail">
+          Thumbnail
+          <input
+            type="file"
+            id="thumbnail"
+            name="thumbnail"
+            placeholder="Thumbnail"
+            required
+          />
+        </label>
+
+        <br />
+
+        <input type="submit" value="Add Product" id="submitBtn" />
+      </form>
+    </main>
+  </body>
+
+  <script>
+    function checkProductName(productName) {
+      var productName = productName;
+      var submitBtn = document.getElementById("submitBtn");
+
+      if (productName == "Straws") {
+        submitBtn.disabled = true;
+      } else {
+        submitBtn.disabled = false;
+      }
+    }
+  </script>
+</html>
