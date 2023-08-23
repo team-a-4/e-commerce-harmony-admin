@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2023 at 11:15 AM
+-- Generation Time: Aug 23, 2023 at 08:30 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,6 +33,7 @@ CREATE TABLE `inventories` (
   `product_barcode` varchar(11) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `weight` double DEFAULT NULL,
+  `unit` varchar(11) NOT NULL,
   `production_date` date NOT NULL,
   `expiry_date` date NOT NULL,
   `cost_price` double NOT NULL,
@@ -43,10 +44,10 @@ CREATE TABLE `inventories` (
 -- Dumping data for table `inventories`
 --
 
-INSERT INTO `inventories` (`inventory_id`, `product_id`, `product_barcode`, `quantity`, `weight`, `production_date`, `expiry_date`, `cost_price`, `selling_price`) VALUES
-('1001', '12', 'PLEAF1001', 0, 3000, '2023-08-15', '2024-08-15', 2.5, 5),
-('1002', '2', 'STRAW2001', 300, NULL, '2023-08-10', '2024-08-10', 0.05, 0.15),
-('1003', '3', 'CUP3001', 200, NULL, '2023-08-20', '2024-08-20', 1, 2.5);
+INSERT INTO `inventories` (`inventory_id`, `product_id`, `product_barcode`, `quantity`, `weight`, `unit`, `production_date`, `expiry_date`, `cost_price`, `selling_price`) VALUES
+('1001', '12', 'PLA10011200', 0, 3000, '', '2023-08-15', '2024-08-15', 2.5, 5),
+('1002', '2', 'STR20012000', 300, NULL, '', '2023-08-10', '2024-08-10', 0.05, 0.15),
+('1003', '3', 'CUP30013000', 200, NULL, '', '2023-08-20', '2024-08-20', 1, 2.5);
 
 -- --------------------------------------------------------
 
