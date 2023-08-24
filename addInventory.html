@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Inventory</title>
     <link
@@ -8,6 +8,104 @@
     />
   </head>
   <body>
-    TO DO - Add a form to add inventory - PHP to add inventory to database
+    <main class="container">
+      <h2>Add Inventory</h2>
+      <form action="loadInvetory.php" method="post">
+        <label for="barcode">
+          Barcode Product
+          <input
+            type="text"
+            id="barcode"
+            name="barcode"
+            placeholder="Barcode Product"
+            required
+            onchange="checkProductName()"
+          />
+        </label>
+        <div class="grid">
+          
+
+          <label for="quantity">
+            Quantity
+            <input
+              type="text"
+              id="quantity"
+              name="quantity"
+              placeholder="Quantity (pcs)"
+              onchange="checkProductName()"
+            />
+          </label>
+          <label for="weight">
+            Weight
+            <input
+              type="text"
+              id="weight"
+              name="weight"
+              placeholder="Weight (g)"
+              onchange="checkProductName()"
+            />
+          </label>
+        </div>
+
+        <div class="grid">
+          
+
+          <label for="productionDate">
+            Production Date
+            <input
+              type="date"
+              id="productionDate"
+              name="productionDate"
+              placeholder="Production Date (yyyy-mm-dd)"
+              required
+              onchange="checkProductName()"
+            />
+          </label>
+
+          <label for="productName">
+            Expiry Date
+            <input
+              type="date"
+              id="expiryDate"
+              name="expiryDate"
+              placeholder="Expiry Date (yyyy-mm-dd)"
+              required
+              onchange="checkProductName()"
+            />
+          </label>
+        </div>
+
+        <div class="grid">
+          
+
+          <label for="costPrice">
+            Cost Price
+            <input
+              type="text"
+              id="costPrice"
+              name="costPrice"
+              placeholder="Cost Price"
+              required
+              onchange="checkProductName()"
+            />
+          </label>
+
+          
+          <label for="sellingPrice">
+            Selling Price
+            <input
+              type="text"
+              id="sellingPrice"
+              name="sellingPrice"
+              placeholder="Selling Price"
+              required
+              onchange="checkProductName()"
+            />
+          </label>
+        </div>
+
+        <input type="submit" value="Add Inventory" id="submitBtn" />
+      </form>
+    </main>
   </body>
 </html>

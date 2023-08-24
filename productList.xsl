@@ -6,6 +6,7 @@
                 <link rel="stylesheet"
                     href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"></link>
                 <title>Inventory</title>
+                <script src="./product.js"></script>
             </head>
             <body>
                 <main class="container">
@@ -44,7 +45,11 @@
             <xsl:for-each select="product">
                 <tr>
                     <td>
-                        <a href="./product.xml">
+                        <!-- <a href="./product.xml">
+                            <xsl:value-of select="@productId" />
+                        </a> -->
+
+                        <a href="javascript:void(0);" onclick="loadProduct({@productId})">
                             <xsl:value-of select="@productId" />
                         </a>
                     </td>
@@ -55,18 +60,42 @@
                         <xsl:value-of select="brand" />
                     </td>
                     <td>
-                        <xsl:value-of select="sum(stock/inventory/quantity)" />
+                        <xsl:variable name="sumQuantity" select="sum(stock/inventory/quantity)" />
+                        <xsl:variable name="sumWeight" select="sum(stock/inventory/weight)" />
+                        <xsl:value-of select="concat($sumQuantity, ' / ', $sumWeight)" />
                     </td>
                     <td>
-                        <xsl:value-of
-                            select="format-number(sum(stock/inventory/pricing/costPrice) div count(stock/inventory), '0.00')" />
+                        <xsl:variable name="avgCostPrice" select="sum(stock/inventory/pricing/costPrice) div count(stock/inventory/pricing/costPrice)" />
+                        <xsl:choose>
+                            <xsl:when test="not($avgCostPrice)">
+                                <xsl:text>-</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="format-number($avgCostPrice, '0.00')" />
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </td>
                     <td>
-                        <xsl:value-of
-                            select="format-number(sum(stock/inventory/pricing/sellingPrice) div count(stock/inventory), '0.00')" />
+                        <xsl:variable name="avgSellPrice" select="sum(stock/inventory/pricing/sellingPrice) div count(stock/inventory/pricing/sellingPrice)" />
+                        <xsl:choose>
+                            <xsl:when test="not($avgSellPrice)">
+                                <xsl:text>-</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="format-number($avgSellPrice, '0.00')" />
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </td>
                     <td>
-                        <xsl:value-of select="count(stock/inventory)" />
+                        <xsl:variable name="inventoryCount" select="count(stock/inventory)" />
+                        <xsl:choose>
+                            <xsl:when test="$inventoryCount = 0">
+                                <xsl:text>-</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$inventoryCount" />
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </td>
                 </tr>
             </xsl:for-each>
