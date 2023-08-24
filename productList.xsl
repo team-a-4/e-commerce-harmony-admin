@@ -60,7 +60,9 @@
                         <xsl:value-of select="brand" />
                     </td>
                     <td>
-                        <xsl:value-of select="sum(stock/inventory/quantity)" />
+                        <xsl:variable name="sumQuantity" select="sum(stock/inventory/quantity)" />
+                        <xsl:variable name="sumWeight" select="sum(stock/inventory/weight)" />
+                        <xsl:value-of select="concat($sumQuantity, ' / ', $sumWeight)" />
                     </td>
                     <td>
                         <xsl:variable name="avgCostPrice" select="sum(stock/inventory/pricing/costPrice) div count(stock/inventory/pricing/costPrice)" />
@@ -85,7 +87,15 @@
                         </xsl:choose>
                     </td>
                     <td>
-                        <xsl:value-of select="count(stock/inventory)" />
+                        <xsl:variable name="inventoryCount" select="count(stock/inventory)" />
+                        <xsl:choose>
+                            <xsl:when test="$inventoryCount = 0">
+                                <xsl:text>-</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$inventoryCount" />
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </td>
                 </tr>
             </xsl:for-each>
