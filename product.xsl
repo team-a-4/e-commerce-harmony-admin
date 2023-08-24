@@ -10,49 +10,52 @@
             <body>
                 <main class="container">
                     <h1>Product Information</h1>
-                    <table role="grid">
-                        <thead>
-                        <tr>
-                            <th>Product ID</th>
-                            <td>
-                                <xsl:value-of select="@productId" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Category</th>
-                            <td>
-                                <xsl:value-of select="@category" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Brand</th>
-                            <td>
-                                <xsl:value-of select="brand" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Name</th>
-                            <td>
-                                <xsl:value-of select="name" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td>
-                                <xsl:value-of select="description" disable-output-escaping="yes" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Thumbnail</th>
-                            <td>
-                                <img
-                                    style="width: 100px; height: 100px;"
-                                    src="https://www.rewardhospitality.com.au/images/ProductImages/500/3456172.jpg"
-                                    alt="Product Image" />
-                            </td>
-                        </tr>
-                    </thead>
-                    </table>
+                    <figure>
+                        <table role="grid">
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <td>
+                                        <xsl:value-of select="@productId" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Category</th>
+                                    <td>
+                                        <xsl:value-of select="@category" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Brand</th>
+                                    <td>
+                                        <xsl:value-of select="brand" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>
+                                        <xsl:value-of select="name" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>
+                                        <xsl:value-of select="description"
+                                            disable-output-escaping="yes" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Thumbnail</th>
+                                    <td>
+                                        <img
+                                            style="width: 100px; height: 100px;"
+                                            src="https://www.rewardhospitality.com.au/images/ProductImages/500/3456172.jpg"
+                                            alt="Product Image" />
+                                    </td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </figure>
 
                     <article>
                         <div class="grid">
@@ -66,30 +69,33 @@
                                 <button onclick="location.href='./addInventory.html'">New Inventory</button>
                             </div>
                         </div>
-                        <table role="grid">
-                            <thead>
-                                <tr>
-                                    <th>Inventory ID</th>
-                                    <th>Product Barcode</th>
-                                    <xsl:choose>
-                                        <xsl:when test="stock/inventory/quantity">
-                                            <th>Quantity</th>
-                                        </xsl:when>
-                                    </xsl:choose>
-                                    <xsl:choose>
-                                        <xsl:when test="stock/inventory/weight">
-                                            <th>Weight</th>
-                                        </xsl:when>
-                                    </xsl:choose>
-                                    <th>Production Date</th>
-                                    <th>Expiry Date</th>
-                                    <th>Cost Price</th>
-                                    <th>Selling Price</th>
-                                    <th>Profit</th>
-                                </tr>
-                            </thead>
-                            <xsl:apply-templates select="stock/inventory" />
-                        </table>
+                        <figure>
+                            <table role="grid">
+                                <thead>
+                                    <tr>
+                                        <th>Inventory ID</th>
+                                        <th>Product Barcode</th>
+                                        <xsl:choose>
+                                            <xsl:when test="stock/inventory/quantity">
+                                                <th>Quantity</th>
+                                            </xsl:when>
+                                        </xsl:choose>
+                                        <xsl:choose>
+                                            <xsl:when test="stock/inventory/weight">
+                                                <th>Weight</th>
+                                            </xsl:when>
+                                        </xsl:choose>
+                                        <th>Production Date</th>
+                                        <th>Expiry Date</th>
+                                        <th>Cost Price</th>
+                                        <th>Selling Price</th>
+                                        <th>Profit</th>
+                                    </tr>
+                                </thead>
+                                <xsl:apply-templates select="stock/inventory" />
+
+                            </table>
+                        </figure>
                     </article>
                 </main>
             </body>
