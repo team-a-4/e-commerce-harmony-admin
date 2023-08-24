@@ -1,3 +1,46 @@
+<?php
+require("dbConnect.php");
+
+$product_id = $_GET["product_id"];
+
+if (isset($_POST['submit'])) {
+    $barcode = $_POST["barcode"];
+    $quantity = $_POST["quantity"];
+    $weight = $_POST["weight"];
+    $productionDate = $_POST["productionDate"];
+    $expiryDate = $_POST["expiryDate"];
+    $costPrice = $_POST["costPrice"];
+    $sellingPrice = $_POST["sellingPrice"];
+    
+
+    $sql = "INSERT INTO inventories (product_id, product_barcode, quantity, weight, production_date, expiry_date, cost_price, selling_price)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "issdssdd", $product_id, $barcode, $quantity, $weight, $productionDate, $expiryDate, $costPrice, $sellingPrice);
+    
+
+    if (empty($quantity)) {
+        $quantity = NULL;
+    }
+    
+    if (empty($weight)) {
+        $weight = NULL;
+    }
+    
+    if (mysqli_stmt_execute($stmt)) {
+        echo "Data inserted successfully";
+    } else {
+        echo "Error: " . mysqli_error($con);
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+mysqli_close($con);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +53,9 @@
   <body>
     <main class="container">
       <h2>Add Inventory</h2>
-      <form action="loadInvetory.php" method="post">
+      <?php
+      echo "<form action='addInventory.php?product_id=" . $product_id."' method='post'>"
+      ?>
         <label for="barcode">
           Barcode Product
           <input
@@ -19,7 +64,7 @@
             name="barcode"
             placeholder="Barcode Product"
             required
-            onchange="checkProductName()"
+            
           />
         </label>
         <div class="grid">
@@ -32,7 +77,7 @@
               id="quantity"
               name="quantity"
               placeholder="Quantity (pcs)"
-              onchange="checkProductName()"
+             
             />
           </label>
           <label for="weight">
@@ -42,7 +87,7 @@
               id="weight"
               name="weight"
               placeholder="Weight (g)"
-              onchange="checkProductName()"
+             
             />
           </label>
         </div>
@@ -58,7 +103,7 @@
               name="productionDate"
               placeholder="Production Date (yyyy-mm-dd)"
               required
-              onchange="checkProductName()"
+             
             />
           </label>
 
@@ -70,7 +115,7 @@
               name="expiryDate"
               placeholder="Expiry Date (yyyy-mm-dd)"
               required
-              onchange="checkProductName()"
+             
             />
           </label>
         </div>
@@ -86,7 +131,7 @@
               name="costPrice"
               placeholder="Cost Price"
               required
-              onchange="checkProductName()"
+              
             />
           </label>
 
@@ -99,12 +144,12 @@
               name="sellingPrice"
               placeholder="Selling Price"
               required
-              onchange="checkProductName()"
+             
             />
           </label>
         </div>
 
-        <input type="submit" value="Add Inventory" id="submitBtn" />
+        <input type="submit" name="submit" value="Add Inventory" id="submitBtn" />
       </form>
     </main>
   </body>
