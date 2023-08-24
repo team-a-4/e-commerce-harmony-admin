@@ -6,6 +6,7 @@
                 <link rel="stylesheet"
                     href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"></link>
                 <title>Product Information</title>
+                <script src="./product.js"></script>
             </head>
             <body>
                 <main class="container">
@@ -66,7 +67,7 @@
                             <div></div>
                             <div></div>
                             <div>
-                                <button onclick="location.href='./addInventory.html'">New Inventory</button>
+                               <button onclick="loadInventory({@productId});">New Inventory</button>
                             </div>
                         </div>
                         <table role="grid">
