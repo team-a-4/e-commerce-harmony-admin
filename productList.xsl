@@ -6,6 +6,7 @@
                 <link rel="stylesheet"
                     href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"></link>
                 <title>Inventory</title>
+                <script src="./product.js"></script>
             </head>
             <body>
                 <main class="container">
@@ -44,7 +45,11 @@
             <xsl:for-each select="product">
                 <tr>
                     <td>
-                        <a href="./product.xml">
+                        <!-- <a href="./product.xml">
+                            <xsl:value-of select="@productId" />
+                        </a> -->
+
+                        <a href="javascript:void(0);" onclick="loadProduct({@productId})">
                             <xsl:value-of select="@productId" />
                         </a>
                     </td>
