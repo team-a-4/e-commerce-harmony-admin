@@ -58,12 +58,26 @@
                         <xsl:value-of select="sum(stock/inventory/quantity)" />
                     </td>
                     <td>
-                        <xsl:value-of
-                            select="format-number(sum(stock/inventory/pricing/costPrice) div count(stock/inventory), '0.00')" />
+                        <xsl:variable name="avgCostPrice" select="sum(stock/inventory/pricing/costPrice) div count(stock/inventory/pricing/costPrice)" />
+                        <xsl:choose>
+                            <xsl:when test="not($avgCostPrice)">
+                                <xsl:text>-</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="format-number($avgCostPrice, '0.00')" />
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </td>
                     <td>
-                        <xsl:value-of
-                            select="format-number(sum(stock/inventory/pricing/sellingPrice) div count(stock/inventory), '0.00')" />
+                        <xsl:variable name="avgSellPrice" select="sum(stock/inventory/pricing/sellingPrice) div count(stock/inventory/pricing/sellingPrice)" />
+                        <xsl:choose>
+                            <xsl:when test="not($avgSellPrice)">
+                                <xsl:text>-</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="format-number($avgSellPrice, '0.00')" />
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </td>
                     <td>
                         <xsl:value-of select="count(stock/inventory)" />

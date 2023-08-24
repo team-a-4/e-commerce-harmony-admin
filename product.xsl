@@ -69,33 +69,30 @@
                                 <button onclick="location.href='./addInventory.html'">New Inventory</button>
                             </div>
                         </div>
-                        <figure>
-                            <table role="grid">
-                                <thead>
-                                    <tr>
-                                        <th>Inventory ID</th>
-                                        <th>Product Barcode</th>
-                                        <xsl:choose>
-                                            <xsl:when test="stock/inventory/quantity">
-                                                <th>Quantity</th>
-                                            </xsl:when>
-                                        </xsl:choose>
-                                        <xsl:choose>
-                                            <xsl:when test="stock/inventory/weight">
-                                                <th>Weight</th>
-                                            </xsl:when>
-                                        </xsl:choose>
-                                        <th>Production Date</th>
-                                        <th>Expiry Date</th>
-                                        <th>Cost Price</th>
-                                        <th>Selling Price</th>
-                                        <th>Profit</th>
-                                    </tr>
-                                </thead>
-                                <xsl:apply-templates select="stock/inventory" />
-
-                            </table>
-                        </figure>
+                        <table role="grid">
+                            <thead>
+                                <tr>
+                                    <th>Inventory ID</th>
+                                    <th>Product Barcode</th>
+                                    <xsl:choose>
+                                        <xsl:when test="stock/inventory/quantity">
+                                            <th>Quantity</th>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                    <xsl:choose>
+                                        <xsl:when test="stock/inventory/weight">
+                                            <th>Weight</th>
+                                        </xsl:when>
+                                    </xsl:choose>
+                                    <th>Production Date</th>
+                                    <th>Expiry Date</th>
+                                    <th>Cost Price</th>
+                                    <th>Selling Price</th>
+                                    <th>Profit</th>
+                                </tr>
+                            </thead>
+                            <xsl:apply-templates select="stock/inventory" />
+                        </table>
                     </article>
                 </main>
             </body>
