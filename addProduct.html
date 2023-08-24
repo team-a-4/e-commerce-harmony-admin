@@ -11,7 +11,7 @@
   <body>
     <main class="container">
       <h2>Add Product</h2>
-      <form>
+      <form action="addProduct.php" method="post" enctype="multipart/form-data">
         <div class="grid">
           <label for="productName">
             Product Name
@@ -65,13 +65,14 @@
             id="thumbnail"
             name="thumbnail"
             placeholder="Thumbnail"
+            accept="image/jpg, image/jpeg, image/png"    
             required
           />
         </label>
 
         <br />
 
-        <input type="submit" value="Add Product" id="submitBtn" />
+        <input type="submit" value="Add Product" name="button" id="submitBtn" />
       </form>
     </main>
   </body>
