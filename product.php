@@ -23,18 +23,18 @@ if ($result->num_rows > 0) {
     $sql2 = "SELECT * FROM inventories WHERE product_id = " . $row["product_id"];
     $result2 = mysqli_query($con, $sql2);
     if ($result2->num_rows > 0) {
-        $row2 = mysqli_fetch_assoc($result2); // Fetch inventory data
-
-        $xml .= '        <inventory inventoryId="' . $row2["inventory_id"] . '">' . PHP_EOL;
-        $xml .= '            <productBarcode>' . $row2["product_barcode"] . '</productBarcode>' . PHP_EOL;
-        $xml .= '            <quantity unit="' . ($row2["quantity"] ? "pcs" : "single") . '">' . $row2["quantity"] . '</quantity>' . PHP_EOL;
-        $xml .= '            <productionDate>' . $row2["production_date"] . '</productionDate>' . PHP_EOL;
-        $xml .= '            <expiryDate>' . $row2["expiry_date"] . '</expiryDate>' . PHP_EOL;
-        $xml .= '            <pricing>' . PHP_EOL;
-        $xml .= '                <costPrice>' . $row2["cost_price"] . '</costPrice>' . PHP_EOL;
-        $xml .= '                <sellingPrice>' . $row2["selling_price"] . '</sellingPrice>' . PHP_EOL;
-        $xml .= '            </pricing>' . PHP_EOL;
-        $xml .= '        </inventory>' . PHP_EOL;
+        while ($row2 = $result2 -> fetch_assoc()) {
+            $xml .= '        <inventory inventoryId="' . $row2["inventory_id"] . '">' . PHP_EOL;
+            $xml .= '            <productBarcode>' . $row2["product_barcode"] . '</productBarcode>' . PHP_EOL;
+            $xml .= '            <quantity unit="' . ($row2["quantity"] ? "pcs" : "single") . '">' . $row2["quantity"] . '</quantity>' . PHP_EOL;
+            $xml .= '            <productionDate>' . $row2["production_date"] . '</productionDate>' . PHP_EOL;
+            $xml .= '            <expiryDate>' . $row2["expiry_date"] . '</expiryDate>' . PHP_EOL;
+            $xml .= '            <pricing>' . PHP_EOL;
+            $xml .= '                <costPrice>' . $row2["cost_price"] . '</costPrice>' . PHP_EOL;
+            $xml .= '                <sellingPrice>' . $row2["selling_price"] . '</sellingPrice>' . PHP_EOL;
+            $xml .= '            </pricing>' . PHP_EOL;
+            $xml .= '        </inventory>' . PHP_EOL;
+        }
     }
 
     $xml .= '    </stock>' . PHP_EOL;
