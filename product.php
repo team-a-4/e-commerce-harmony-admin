@@ -28,11 +28,11 @@ if ($result->num_rows > 0) {
             $xml .= '            <productBarcode>' . $row2["product_barcode"] . '</productBarcode>' . PHP_EOL;
             if($row2["quantity"])
             {
-                $xml .= '            <quantity unit="' . ($row2["quantity"] ? "pcs" : "single") . '">' . $row2["quantity"] . '</quantity>' . PHP_EOL;
+                $xml .= '            <quantity unit="' . ($row2["unit"]) . '">' . $row2["quantity"] . '</quantity>' . PHP_EOL;
             }
             else
             {
-                $xml .= '            <weight unit="' . ($row2["weight"] ? "kg" : "single") . '">' . $row2["weight"] . '</weight>' . PHP_EOL;
+                $xml .= '            <weight unit="' . ($row2["unit"]) . '">' . $row2["weight"] . '</weight>' . PHP_EOL;
             }
             $xml .= '            <productionDate>' . $row2["production_date"] . '</productionDate>' . PHP_EOL;
             $xml .= '            <expiryDate>' . $row2["expiry_date"] . '</expiryDate>' . PHP_EOL;
