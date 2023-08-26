@@ -7,16 +7,17 @@ if (isset($_POST['submit'])) {
     $barcode = $_POST["barcode"];
     $quantity = $_POST["quantity"];
     $weight = $_POST["weight"];
+    $unit = $_POST["unit"];
     $productionDate = $_POST["productionDate"];
     $expiryDate = $_POST["expiryDate"];
     $costPrice = $_POST["costPrice"];
     $sellingPrice = $_POST["sellingPrice"];
     
-    $sql = "INSERT INTO inventories (product_id, product_barcode, quantity, weight, production_date, expiry_date, cost_price, selling_price)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO inventories (product_id, product_barcode, quantity, weight, unit, production_date, expiry_date, cost_price, selling_price)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, "issdssdd", $product_id, $barcode, $quantity, $weight, $productionDate, $expiryDate, $costPrice, $sellingPrice);
+    mysqli_stmt_bind_param($stmt, "issdssdds", $product_id, $barcode, $quantity, $weight, $unit, $productionDate, $expiryDate, $costPrice, $sellingPrice);
 
     if (empty($quantity)) {
         $quantity = NULL;
@@ -64,32 +65,41 @@ mysqli_close($con);
             name="barcode"
             placeholder="Barcode Product"
             required
+            minlength="13"
+            maxlength="13"
             
           />
         </label>
         <div class="grid">
           
-
-          <label for="quantity">
+        <label for="quantity">
             Quantity
             <input
-              type="text"
+              type="number"
               id="quantity"
               name="quantity"
-              placeholder="Quantity (pcs)"
+              placeholder="Quantity"
              
             />
           </label>
           <label for="weight">
             Weight
             <input
-              type="text"
+              type="number"
               id="weight"
               name="weight"
-              placeholder="Weight (g)"
+              placeholder="Weight"
              
             />
           </label>
+          <label for="unit">
+            Unit
+            <select id="unit" name="unit">
+                <option value="Pcs">Pcs</option>
+                <option value="Kg">Kg</option>
+                <option value="g">g</option>
+            </select>
+        </label>
         </div>
 
         <div class="grid">
