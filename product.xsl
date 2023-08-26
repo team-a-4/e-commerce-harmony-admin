@@ -67,7 +67,7 @@
                             <div></div>
                             <div></div>
                             <div>
-                               <button onclick="loadInventory({@productId});">New Inventory</button>
+                                <button onclick="loadInventory({@productId});">New Inventory</button>
                             </div>
                         </div>
                         <table role="grid">
@@ -110,6 +110,59 @@
             </td>
 
             <xsl:choose>
+                <xsl:when test="quantity  &gt; 0">
+                    <xsl:choose>
+                        <xsl:when test="quantity &lt; 15">
+                            <td style="color: orange;">
+                                <xsl:value-of select="quantity" />
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of
+                                    select="quantity/@unit" />
+                            </td>
+                        </xsl:when>
+
+                        <xsl:otherwise>
+                            <td>
+                                <xsl:value-of select="quantity" />
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of
+                                    select="quantity/@unit" />
+                            </td>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+
+                <xsl:when test="weight  &gt; 0">
+                    <xsl:choose>
+                        <xsl:when test="weight &lt; 25">
+                            <td style="color: orange;">
+                                <xsl:value-of select="weight" />
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of
+                                    select="weight/@unit" />
+                            </td>
+                        </xsl:when>
+
+                        <xsl:otherwise>
+                            <td>
+                                <xsl:value-of select="weight" />
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of
+                                    select="weight/@unit" />
+                            </td>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+
+                <xsl:otherwise>
+                    <td style="color: red;">
+                        <xsl:text>Out of Stock</xsl:text>
+                    </td>
+                </xsl:otherwise>
+            </xsl:choose>
+
+
+            <!-- <xsl:choose>
 
                 <xsl:when test="quantity">
 
@@ -156,9 +209,9 @@
                         </xsl:otherwise>
                     </xsl:choose>
 
-                </xsl:otherwise>
+                </xsl:otherwise> -->
 
-            </xsl:choose>
+            <!-- </xsl:choose> -->
 
             <td>
                 <xsl:value-of select="productionDate" />
