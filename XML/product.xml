@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="product.xsl"?>
+<?xml-stylesheet type="text/xsl" href="../XSLT/product.xsl"?>
 
 <product productId="001" category="Straws">
 
@@ -51,6 +51,6 @@
 
         </inventory>
 
-        
+
     </stock>
 </product>

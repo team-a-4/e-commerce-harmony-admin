@@ -3,7 +3,7 @@ header("Content-type: text/xml");
 $productName = $_GET["productName"];
 $brandName = $_GET["brandName"];
 
-require("dbConnect.php");
+require("Helper/dbConnect.php");
 
 $sql = "SELECT * FROM products WHERE product_name = '" . $productName . "' AND product_brand = '" . $brandName . "'";
 

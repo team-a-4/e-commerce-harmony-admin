@@ -1,5 +1,5 @@
 <?php
-require("dbConnect.php");
+require("Helper/dbConnect.php");
 
 $product_id = $_GET["product_id"];
 
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     if (mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);
         mysqli_close($con);
-        header("Location: product.php?product_id=".$product_id);
+        header("Location: loadSingleProduct.php?product_id=".$product_id);
         exit();
     } else {
         echo "Error: " . mysqli_error($con);

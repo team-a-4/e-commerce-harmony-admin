@@ -1,13 +1,12 @@
 <?php
-
-require("dbConnect.php");
+require("Helper/dbConnect.php");
 
 $sql = "SELECT * FROM products";
 $result = mysqli_query($con, $sql);
 
 header("Content-type: text/xml");
 $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-$xml .= '<?xml-stylesheet type="text/xsl" href="productList.xsl"?>';
+$xml .= '<?xml-stylesheet type="text/xsl" href="../XSLT/productList.xsl"?>';
 $xml .= '<products>';
 
 if ($result -> num_rows > 0) {

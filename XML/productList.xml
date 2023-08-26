@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="productList.xsl"?>
+<?xml-stylesheet type="text/xsl" href="../XSLT/productList.xsl"?>
 <products>
     <product productId="001" category="Straws">
 
