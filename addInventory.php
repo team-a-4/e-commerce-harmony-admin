@@ -12,13 +12,11 @@ if (isset($_POST['submit'])) {
     $costPrice = $_POST["costPrice"];
     $sellingPrice = $_POST["sellingPrice"];
     
-
     $sql = "INSERT INTO inventories (product_id, product_barcode, quantity, weight, production_date, expiry_date, cost_price, selling_price)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, "issdssdd", $product_id, $barcode, $quantity, $weight, $productionDate, $expiryDate, $costPrice, $sellingPrice);
-    
 
     if (empty($quantity)) {
         $quantity = NULL;
@@ -29,16 +27,18 @@ if (isset($_POST['submit'])) {
     }
     
     if (mysqli_stmt_execute($stmt)) {
-        echo "Data inserted successfully";
+        mysqli_stmt_close($stmt);
+        mysqli_close($con);
+        header("Location: product.php?product_id=".$product_id);
+        exit();
     } else {
         echo "Error: " . mysqli_error($con);
     }
-
-    mysqli_stmt_close($stmt);
 }
 
 mysqli_close($con);
 ?>
+
 
 
 <!DOCTYPE html>
@@ -149,7 +149,8 @@ mysqli_close($con);
           </label>
         </div>
 
-        <input type="submit" name="submit" value="Add Inventory" id="submitBtn" />
+        <input type="submit" name="submit" value="Add Inventory" id="submitBtn"/>
+        
       </form>
     </main>
   </body>
