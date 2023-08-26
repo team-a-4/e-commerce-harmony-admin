@@ -11,7 +11,11 @@
   <body>
     <main class="container">
       <h2>Add Product</h2>
-      <form action="addProduct.php" method="post" enctype="multipart/form-data">
+      <form
+        action="./PHP/addProduct.php"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div class="grid">
           <label for="productName">
             Product Name
@@ -65,7 +69,7 @@
             id="thumbnail"
             name="thumbnail"
             placeholder="Thumbnail"
-            accept="image/jpg, image/jpeg, image/png"    
+            accept="image/jpg, image/jpeg, image/png"
             required
           />
         </label>
@@ -92,7 +96,7 @@
 
       http_request.open(
         "GET",
-        "checkProduct.php?productName=" +
+        "PHP/checkProduct.php?productName=" +
           productName +
           "&brandName=" +
           brandName,

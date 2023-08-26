@@ -6,7 +6,7 @@
                 <link rel="stylesheet"
                     href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"></link>
                 <title>Product Information</title>
-                <script src="./product.js"></script>
+                <script src="../JS/product.js"></script>
             </head>
             <body>
                 <main class="container">
@@ -67,7 +67,7 @@
                             <div></div>
                             <div></div>
                             <div>
-                               <button onclick="loadInventory({@productId});">New Inventory</button>
+                                <button onclick="loadInventory({@productId});">New Inventory</button>
                             </div>
                         </div>
                         <table role="grid">
@@ -75,16 +75,7 @@
                                 <tr>
                                     <th>Inventory ID</th>
                                     <th>Product Barcode</th>
-                                    <xsl:choose>
-                                        <xsl:when test="stock/inventory/quantity">
-                                            <th>Quantity</th>
-                                        </xsl:when>
-                                    </xsl:choose>
-                                    <xsl:choose>
-                                        <xsl:when test="stock/inventory/weight">
-                                            <th>Weight</th>
-                                        </xsl:when>
-                                    </xsl:choose>
+                                    <th>Quantity/Weight</th>
                                     <th>Production Date</th>
                                     <th>Expiry Date</th>
                                     <th>Cost Price</th>
@@ -110,12 +101,10 @@
             </td>
 
             <xsl:choose>
-
-                <xsl:when test="quantity">
-
+                <xsl:when test="quantity  &gt; 0">
                     <xsl:choose>
-                        <xsl:when test="quantity &lt; 6">
-                            <td style="color: red;">
+                        <xsl:when test="quantity &lt; 15">
+                            <td style="color: orange;">
                                 <xsl:value-of select="quantity" />
                                 <xsl:text> </xsl:text>
                                 <xsl:value-of
@@ -132,13 +121,12 @@
                             </td>
                         </xsl:otherwise>
                     </xsl:choose>
-
                 </xsl:when>
-                <xsl:otherwise>
 
+                <xsl:when test="weight  &gt; 0">
                     <xsl:choose>
-                        <xsl:when test="weight &lt; 6">
-                            <td style="color: red;">
+                        <xsl:when test="weight &lt; 25">
+                            <td style="color: orange;">
                                 <xsl:value-of select="weight" />
                                 <xsl:text> </xsl:text>
                                 <xsl:value-of
@@ -155,9 +143,13 @@
                             </td>
                         </xsl:otherwise>
                     </xsl:choose>
+                </xsl:when>
 
+                <xsl:otherwise>
+                    <td style="color: red;">
+                        <xsl:text>Out of Stock</xsl:text>
+                    </td>
                 </xsl:otherwise>
-
             </xsl:choose>
 
             <td>

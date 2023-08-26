@@ -1,5 +1,5 @@
 <?php
-include 'dbConnect.php';
+require("Helper/dbConnect.php");
 
 if(isset($_POST['button'])){
 
@@ -20,22 +20,11 @@ if(isset($_POST['button'])){
         echo "added successfully!!";
         $addProduct = mysqli_query($con, "INSERT INTO `products` (category, product_name, product_desc, product_brand, product_image) VALUES('$category', '$productName', '$description', '$brandName', '$image')") or die('query failed');
         move_uploaded_file($imageTemp, $imageFolder);  //file is stored in uploadedimages folder.
-        
-       
-        
     }
     else{
         echo '<b style="color: red;">Product already exists</b>';
 }
 }
-
-//Changes to do:
-
-// change length of image column
-// auto-increment
-// add method, action, enctype attributes in form tag
-//accept attribute in thumbnail
-//
 
 ?>
 
