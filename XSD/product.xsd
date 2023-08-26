@@ -6,7 +6,14 @@
             <xs:sequence>
                 <xs:element name="brand" type="xs:string"/>
                 <xs:element name="name" type="xs:string"/>
-                <xs:element name="description" type="xs:string"/>
+                <xs:element name="description">
+                    <xs:complexType mixed="true">
+                        <xs:sequence>
+                            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
 
                 <xs:element name="image">
                     <xs:complexType>
