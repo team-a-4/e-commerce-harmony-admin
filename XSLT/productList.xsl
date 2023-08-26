@@ -16,9 +16,11 @@
                         </div>
                         <div></div>
                         <div></div>
-                        <div></div>
                         <div>
                             <button onclick="location.href='./../addProduct.html'">Add Product</button>
+                        </div>
+                        <div>
+                            <button onclick="location.href='/e-commerce-harmony-admin/PHP/addProductWithXML.php'">Upload xml</button>
                         </div>
                     </div>
                     <table role="grid">
