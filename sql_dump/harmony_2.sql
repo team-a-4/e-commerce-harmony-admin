@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2023 at 03:58 PM
+-- Generation Time: Aug 27, 2023 at 06:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,7 +33,7 @@ CREATE TABLE `inventories` (
   `product_barcode` varchar(13) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
   `weight` double DEFAULT NULL,
-  `unit` varchar(11) NOT NULL,
+  `unit` varchar(3) NOT NULL,
   `production_date` date NOT NULL,
   `expiry_date` date NOT NULL,
   `cost_price` double NOT NULL,
@@ -45,9 +45,9 @@ CREATE TABLE `inventories` (
 --
 
 INSERT INTO `inventories` (`inventory_id`, `product_id`, `product_barcode`, `quantity`, `weight`, `unit`, `production_date`, `expiry_date`, `cost_price`, `selling_price`) VALUES
-(1001, '12', 'PLEAF10011200', NULL, 3000, 'Kg', '2023-08-15', '2024-08-15', 2.5, 5),
-(1002, '2', 'STRAW20012000', 300, NULL, 'Pcs', '2023-08-10', '2024-08-10', 0.05, 0.15),
-(1003, '3', 'CUPGC30013000', 200, NULL, 'Pcs', '2023-08-20', '2024-08-20', 1, 2.5);
+(1001, '3', 'PLEAF10011200', 300, NULL, 'Pcs', '2023-08-15', '2024-08-15', 2.5, 5),
+(1002, '1', 'STRAW20012000', 300, NULL, 'Pcs', '2023-08-10', '2024-08-10', 0.05, 0.15),
+(1003, '2', 'CUPGC30013000', 200, NULL, 'Pcs', '2023-08-20', '2024-08-20', 1, 2.5);
 
 -- --------------------------------------------------------
 
@@ -56,12 +56,12 @@ INSERT INTO `inventories` (`inventory_id`, `product_id`, `product_barcode`, `qua
 --
 
 CREATE TABLE `products` (
-  `product_id` varchar(11) NOT NULL,
-  `category` varchar(30) NOT NULL,
-  `product_name` varchar(30) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `product_name` varchar(200) NOT NULL,
   `product_desc` text NOT NULL,
-  `product_brand` varchar(30) NOT NULL,
-  `product_image` varchar(30) NOT NULL
+  `product_brand` varchar(200) NOT NULL,
+  `product_image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -69,9 +69,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `category`, `product_name`, `product_desc`, `product_brand`, `product_image`) VALUES
-('12', 'Plates', 'Chic Leaf P', 'High-qualit', 'Chic Leaf', '12.png'),
-('2', 'Straws', 'Biodegradab', 'Biodegradab', 'WYMOON', '2.png'),
-('3', 'Cups', 'Reusable Ec', 'Durable and', 'GreenCup', '3.png');
+(1, 'Straws', 'Biodegradab', 'Biodegradab', 'WYMOON', '1.png'),
+(2, 'Cups', 'Reusable Ec', 'Durable and', 'GreenCup', '2.png'),
+(3, 'Plates', 'Chic Leaf P', 'High-qualit', 'Chic Leaf', '3.png');
 
 --
 -- Indexes for dumped tables
@@ -97,7 +97,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `inventories`
 --
 ALTER TABLE `inventories`
-  MODIFY `inventory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1004;
+  MODIFY `inventory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
