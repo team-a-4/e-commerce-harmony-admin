@@ -12,21 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $xmlDoc = new DOMDocument();
             $xmlDoc->load($_FILES["file"]["tmp_name"]); // Load the XML file
 
-            // Extract values for product details from xml file
-            $category = $xmlDoc->documentElement->getAttribute('category');
-            $brand = $xmlDoc->getElementsByTagName('brand')[0]->nodeValue;
-            $productName = $xmlDoc->getElementsByTagName('name')[0]->nodeValue;
-            $description = $xmlDoc->getElementsByTagName('description')[0]->nodeValue;
-            $image = $xmlDoc->getElementsByTagName('image')[0]->nodeValue;
-            $product = mysqli_query($con, "SELECT product_name FROM `products` WHERE product_name = '$productName' AND product_brand = '$brand'");
-
-            if(mysqli_num_rows($product) == 0){
-                $addProduct = mysqli_query($con, "INSERT INTO `products` (category, product_name, product_desc, product_brand, product_image) VALUES ('$category', '$productName', '$description', '$brand', '$image')") or die('query failed');
-            }
-            else{
-                echo '<b style="color: red;">Product already exists</b>';
-            }
-
             // Get product id
             $query = "SELECT product_id FROM `products` WHERE product_name = '$productName' AND product_brand = '$brand'";
             $result = mysqli_query($con, $query);
@@ -68,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 mysqli_query($con, $insertInventoryQuery);
             }
-            echo '<script>alert("Product added successfully");</script>';
-            echo '<script>setTimeout(function() { window.location.href = "/e-commerce-harmony-admin/PHP/loadProducts.php"; }, 1000);</script>';
+            echo '<script>alert("Inventory added successfully");</script>';
+            echo '<script>setTimeout(function() { window.location.href = "loadSingleProduct.php?product_id='.$product_id.'"; }, 1000);</script>';
             exit();
                 
         } else {
@@ -90,11 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
     />
-    <title>Add Product with XML</title>
+    <title>Add Inventory with XML</title>
 </head>
 <body>
 <main class="container">
-    <h2>Add Product with XML</h2>
+    <h2>Add Inventory with XML</h2>
     <form method="POST" enctype="multipart/form-data">
         <div class="grid">
 
@@ -112,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <br />
 
-            <input type="submit" value="Add Product with XML" name="button" id="submitBtn" />
+            <input type="submit" value="Add Inventory with XML" name="button" id="submitBtn" />
         </div>
     </form>
 </main>

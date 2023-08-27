@@ -30,10 +30,12 @@ if (isset($_POST['submit'])) {
     if (mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);
         mysqli_close($con);
-        header("Location: loadSingleProduct.php?product_id=".$product_id);
+        echo '<script>alert("Product added successfully");</script>';
+        echo '<script>setTimeout(function() { window.location.href = "loadSingleProduct.php?product_id='.$product_id.'"; }, 1000);</script>';
         exit();
     } else {
         echo "Error: " . mysqli_error($con);
+        echo '<script>alert("Product added failed");</script>';
     }
 }
 
