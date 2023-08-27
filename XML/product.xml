@@ -20,10 +20,10 @@
 
 
 
-    <image type="local">/001.png</image>
+    <image type="local">001.png</image>
 
     <stock>
-        <inventory inventoryId="INV01">
+        <inventory>
 
             <productBarcode>1234567890123</productBarcode>
 
@@ -39,7 +39,7 @@
 
         </inventory>
 
-        <inventory inventoryId="INV04">
+        <inventory>
 
             <productBarcode>1234567890123</productBarcode>
 
