@@ -1,136 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
-    />
-    <title>Add Product</title>
-  </head>
-  <body>
-    <main class="container">
-      <h2>Add Product</h2>
-      <form
-        action="./PHP/addProduct.php"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <div class="grid">
-          <label for="productName">
-            Product Name
-            <input
-              type="text"
-              id="productName"
-              name="productName"
-              placeholder="Product Name"
-              required
-              onchange="checkProductName()"
-            />
-          </label>
 
-          <label for="brandName">
-            Brand Name
-            <input
-              type="text"
-              id="brandName"
-              name="brandName"
-              placeholder="Brand Name"
-              required
-              onchange="checkProductName()"
-            />
-          </label>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <title>Add Product</title>
+</head>
 
-        <label for="category">
-          Category
-          <select id="category" name="category">
-            <option value="Straws">Straws</option>
-            <option value="Plates">Plates</option>
-            <option value="Utensils">Utensils</option>
-            <option value="Cups">Cups</option>
-            <option value="Bags">Bags</option>
-          </select>
+<body>
+  <main class="container">
+    <h2>Add Product</h2>
+    <form action="./PHP/addProduct.php" method="post" enctype="multipart/form-data">
+      <div class="grid">
+        <label for="productName">
+          Product Name
+          <input type="text" id="productName" name="productName" placeholder="Product Name" required
+            onchange="checkProductName()" />
         </label>
 
-        <label for="description">
-          Description
-          <textarea
-            name="description"
-            id="description"
-            placeholder="Product Description"
-          ></textarea>
+        <label for="brandName">
+          Brand Name
+          <input type="text" id="brandName" name="brandName" placeholder="Brand Name" required
+            onchange="checkProductName()" />
         </label>
+      </div>
 
-        <label for="thumbnail">
-          Thumbnail
-          <input
-            type="file"
-            id="thumbnail"
-            name="thumbnail"
-            placeholder="Thumbnail"
-            accept="image/jpg, image/jpeg, image/png"
-            required
-          />
-        </label>
+      <label for="category">
+        Category
+        <select id="category" name="category">
+          <option value="Straws">Straws</option>
+          <option value="Plates">Plates</option>
+          <option value="Utensils">Utensils</option>
+          <option value="Cups">Cups</option>
+          <option value="Bags">Bags</option>
+        </select>
+      </label>
 
-        <br />
+      <label for="description">
+        Description
+        <textarea name="description" id="description" placeholder="Product Description"></textarea>
+      </label>
 
-        <input type="submit" value="Add Product" name="button" id="submitBtn" />
-      </form>
-    </main>
-  </body>
+      <label for="thumbnail">
+        Thumbnail
+        <input type="file" id="thumbnail" name="thumbnail" placeholder="Thumbnail"
+          accept="image/jpg, image/jpeg, image/png" required />
+      </label>
 
-  <script>
-    function checkProductName() {
-      var productNameField = document.getElementById("productName");
-      var brandNameField = document.getElementById("brandName");
+      <br />
 
-      var productName = productNameField.value;
-      var brandName = brandNameField.value;
+      <input type="submit" value="Add Product" name="button" id="submitBtn" />
+    </form>
+  </main>
+</body>
 
-      if (productName == "" || brandName == "") return;
+<script>
+  function checkProductName() {
+    var productNameField = document.getElementById("productName");
+    var brandNameField = document.getElementById("brandName");
 
-      var submitBtn = document.getElementById("submitBtn");
-      var http_request = new XMLHttpRequest();
+    var productName = productNameField.value;
+    var brandName = brandNameField.value;
 
-      http_request.open(
-        "GET",
-        "PHP/checkProduct.php?productName=" +
-          productName +
-          "&brandName=" +
-          brandName,
-        true
-      );
+    if (productName == "" || brandName == "") return;
 
-      http_request.onreadystatechange = function () {
-        if (http_request.readyState == 4) {
-          if (http_request.status == 200) {
-            var xmlResponse = http_request.responseXML;
-            var status = xmlResponse
-              .getElementsByTagName("status")[0]
-              .getAttribute("exists");
+    var submitBtn = document.getElementById("submitBtn");
+    var http_request = new XMLHttpRequest();
 
-            if (status == "true") {
-              productNameField.setAttribute("aria-invalid", "true");
-              brandNameField.setAttribute("aria-invalid", "true");
+    http_request.open(
+      "GET",
+      "PHP/checkProduct.php?productName=" +
+      productName +
+      "&brandName=" +
+      brandName,
+      true
+    );
 
-              submitBtn.value = "Product Already Exists";
-              submitBtn.disabled = true;
-            } else {
-              productNameField.setAttribute("aria-invalid", "false");
-              brandNameField.setAttribute("aria-invalid", "false");
+    http_request.onreadystatechange = function () {
+      if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+          var xmlResponse = http_request.responseXML;
+          var status = xmlResponse
+            .getElementsByTagName("status")[0]
+            .getAttribute("exists");
 
-              submitBtn.value = "Add Product";
-              submitBtn.disabled = false;
-            }
+          if (status == "true") {
+            productNameField.setAttribute("aria-invalid", "true");
+            brandNameField.setAttribute("aria-invalid", "true");
+
+            submitBtn.value = "Product Already Exists";
+            submitBtn.disabled = true;
           } else {
-            alert("An error has occured making the request");
-          }
-        }
-      };
+            productNameField.setAttribute("aria-invalid", "false");
+            brandNameField.setAttribute("aria-invalid", "false");
 
-      http_request.send(null);
-    }
-  </script>
+            submitBtn.value = "Add Product";
+            submitBtn.disabled = false;
+          }
+        } else {
+          alert("An error has occured making the request");
+        }
+      }
+    };
+
+    http_request.send(null);
+  }
+</script>
 </html>
