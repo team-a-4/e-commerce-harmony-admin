@@ -13,9 +13,11 @@ if(isset($_POST['button'])){
     if(mysqli_num_rows($product) == 0){
         $addProduct = mysqli_query($con, "INSERT INTO `products` (category, product_name, product_desc, product_brand, product_image) VALUES('$category', '$productName', '$description', '$brandName', '$image')") or die('query failed');
         echo '<script>alert("Product added successfully");</script>';
+        echo '<script>window.location.href = "./addProduct.html";</script>';
     }
     else{
-        echo '<b style="color: red;">Product already exists</b>';
+        echo '<script>alert("Product already exists");</script>';
+        echo '<script>window.location.href = "../addProduct.html";</script>';
     }
 }
 ?>
