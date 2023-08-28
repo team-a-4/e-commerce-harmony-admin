@@ -12,57 +12,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $xmlDoc = new DOMDocument();
             $xmlDoc->load($_FILES["file"]["tmp_name"]); // Load the XML file
 
+            // Get product id from URL
+            $url_id = $_GET['product_id'];
+
+            // Extract values for brand and product name from xml file
+            $brand = $xmlDoc->getElementsByTagName('brand')[0]->nodeValue;
+            $productName = $xmlDoc->getElementsByTagName('name')[0]->nodeValue;
+
             // Get product id
             $query = "SELECT product_id FROM `products` WHERE product_name = '$productName' AND product_brand = '$brand'";
             $result = mysqli_query($con, $query);
             $row = mysqli_fetch_assoc($result);
             $id = $row['product_id'];
 
-            // Extract values for inventories from xml file
-            $inventories = $xmlDoc->getElementsByTagName('inventory');
+            if ($url_id == $id){
+                // Extract values for inventories from xml file
+                $inventories = $xmlDoc->getElementsByTagName('inventory');
 
-            foreach ($inventories as $inventory) {
-                $barcode = $inventory->getElementsByTagName('productBarcode')[0]->nodeValue;
-                $productionDate = $inventory->getElementsByTagName('productionDate')[0]->nodeValue;
-                $expiryDate = $inventory->getElementsByTagName('expiryDate')[0]->nodeValue;
-                $costPrice = $inventory->getElementsByTagName('costPrice')[0]->nodeValue;
-                $sellingPrice = $inventory->getElementsByTagName('sellingPrice')[0]->nodeValue;
+                foreach ($inventories as $inventory) {
+                    $barcode = $inventory->getElementsByTagName('productBarcode')[0]->nodeValue;
+                    $productionDate = $inventory->getElementsByTagName('productionDate')[0]->nodeValue;
+                    $expiryDate = $inventory->getElementsByTagName('expiryDate')[0]->nodeValue;
+                    $costPrice = $inventory->getElementsByTagName('costPrice')[0]->nodeValue;
+                    $sellingPrice = $inventory->getElementsByTagName('sellingPrice')[0]->nodeValue;
 
-                // Check if 'quantity' or 'weight' exists and extract accordingly
-                $quantityNode = $inventory->getElementsByTagName('quantity')->item(0);
-                $weightNode = $inventory->getElementsByTagName('weight')->item(0);
+                    // Check if 'quantity' or 'weight' exists and extract accordingly
+                    $quantityNode = $inventory->getElementsByTagName('quantity')->item(0);
+                    $weightNode = $inventory->getElementsByTagName('weight')->item(0);
 
-                if ($quantityNode !== null) {
-                    $quantityValue = $quantityNode->nodeValue;
-                    $quantityUnit = $quantityNode->getAttribute('unit');
-                    
-                } elseif ($weightNode !== null) {
-                    $weightValue = $weightNode->nodeValue;
-                    $weightUnit = $weightNode->getAttribute('unit');
+                    if ($quantityNode !== null) {
+                        $quantityValue = $quantityNode->nodeValue;
+                        $quantityUnit = $quantityNode->getAttribute('unit');
+                        
+                    } elseif ($weightNode !== null) {
+                        $weightValue = $weightNode->nodeValue;
+                        $weightUnit = $weightNode->getAttribute('unit');
 
+                    }
+
+                    if (isset($quantityValue)) {
+                        $insertInventoryQuery = "INSERT INTO `inventories` (product_id, product_barcode, quantity, unit, production_date, expiry_date, cost_price, selling_price) 
+                                                VALUES ('$id', '$barcode', '$quantityValue', '$quantityUnit', '$productionDate', '$expiryDate', '$costPrice', '$sellingPrice')";
+
+                    } elseif (isset($weightValue)) {
+                        $insertInventoryQuery = "INSERT INTO `inventories` (product_id, product_barcode, weight, unit, production_date, expiry_date, cost_price, selling_price) 
+                                                VALUES ('$id', '$barcode', '$weightValue', '$weightUnit', '$productionDate', '$expiryDate', '$costPrice', '$sellingPrice')";
+                    }
+
+                    mysqli_query($con, $insertInventoryQuery);
                 }
-
-                if (isset($quantityValue)) {
-                    $insertInventoryQuery = "INSERT INTO `inventories` (product_id, product_barcode, quantity, unit, production_date, expiry_date, cost_price, selling_price) 
-                                            VALUES ('$id', '$barcode', '$quantityValue', '$quantityUnit', '$productionDate', '$expiryDate', '$costPrice', '$sellingPrice')";
-
-                } elseif (isset($weightValue)) {
-                    $insertInventoryQuery = "INSERT INTO `inventories` (product_id, product_barcode, weight, unit, production_date, expiry_date, cost_price, selling_price) 
-                                            VALUES ('$id', '$barcode', '$weightValue', '$weightUnit', '$productionDate', '$expiryDate', '$costPrice', '$sellingPrice')";
-                }
-
-                mysqli_query($con, $insertInventoryQuery);
+                echo '<script>alert("Inventory added successfully");</script>';
+                echo '<script>setTimeout(function() { window.location.href = "loadSingleProduct.php?product_id='.$url_id.'"; }, 1000);</script>';
+                exit();
             }
-            echo '<script>alert("Inventory added successfully");</script>';
-            echo '<script>setTimeout(function() { window.location.href = "loadSingleProduct.php?product_id='.$product_id.'"; }, 1000);</script>';
-            exit();
-                
+            else{
+                echo '<script>alert("The product in the xml file does not correspond to the current product");</script>';
+                echo '<script>setTimeout(function() { window.location.href = "addInventoryWithXML.php?product_id='.$url_id.'"; }, 10);</script>';
+            }
+
         } else {
             echo '<script>alert("XML is not valid against the XSD");</script>';
+            echo '<script>setTimeout(function() { window.location.href = "addInventoryWithXML.php?product_id='.$url_id.'"; }, 10);</script>';
         }
 
     } else {
         echo "Error uploading file.";
+        echo '<script>setTimeout(function() { window.location.href = "addInventoryWithXML.php?product_id='.$url_id.'"; }, 10);</script>';
     }
 }
 ?>

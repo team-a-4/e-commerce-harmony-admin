@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="../XSLT/productList.xsl"?>
 <products>
-    <product productId="001" category="Straws">
+    <product category="Straws">
 
         <brand>Farmaston</brand>
         <name>200 Count 100% Plant-Based Compostable Straws</name>
@@ -16,14 +16,14 @@
             will be blended into the drink due to oily substances contact (cream, etc.).<br />What
             You Get: 200 compostable bendy straws with the size of 8.25" * 0.25"(8 1/4 inch* 1/4
             inch). Suitable for most beverages, containers and different occasions.</description>
-        <image type="local">/001.png</image>
+        <image type="local">001.png</image>
 
         <stock>
-            <inventory inventoryId="INV01">
+            <inventory>
 
                 <productBarcode>1234567890123</productBarcode>
 
-                <quantity unit="pcs">500</quantity>
+                <quantity unit="Pcs">500</quantity>
 
                 <productionDate>2023-05-15</productionDate>
                 <expiryDate>2024-05-15</expiryDate>
@@ -35,11 +35,11 @@
 
             </inventory>
 
-            <inventory inventoryId="INV04">
+            <inventory>
 
                 <productBarcode>1234567890123</productBarcode>
 
-                <quantity unit="single">2</quantity>
+                <quantity unit="Pcs">2</quantity>
 
                 <productionDate>2023-04-10</productionDate>
                 <expiryDate>2024-04-10</expiryDate>
@@ -51,8 +51,9 @@
 
             </inventory>
         </stock>
+
     </product>
-    <product productId="001" category="Straws">
+    <product category="Straws">
 
         <brand>Farmaston</brand>
         <name>200 Count 100% Plant-Based Compostable Straws</name>
@@ -67,14 +68,14 @@
             will be blended into the drink due to oily substances contact (cream, etc.).<br />What
             You Get: 200 compostable bendy straws with the size of 8.25" * 0.25"(8 1/4 inch* 1/4
             inch). Suitable for most beverages, containers and different occasions.</description>
-        <image type="local">/001.png</image>
+        <image type="local">001.png</image>
 
         <stock>
-            <inventory inventoryId="INV01">
+            <inventory>
 
                 <productBarcode>1234567890123</productBarcode>
 
-                <quantity unit="pcs">500</quantity>
+                <quantity unit="Pcs">500</quantity>
 
                 <productionDate>2023-05-15</productionDate>
                 <expiryDate>2024-05-15</expiryDate>
@@ -86,11 +87,11 @@
 
             </inventory>
 
-            <inventory inventoryId="INV04">
+            <inventory>
 
                 <productBarcode>1234567890123</productBarcode>
 
-                <quantity unit="single">2</quantity>
+                <quantity unit="Pcs">2</quantity>
 
                 <productionDate>2023-04-10</productionDate>
                 <expiryDate>2024-04-10</expiryDate>
@@ -102,8 +103,9 @@
 
             </inventory>
         </stock>
+
     </product>
-    <product productId="001" category="Straws">
+    <product category="Straws">
 
         <brand>Farmaston</brand>
         <name>200 Count 100% Plant-Based Compostable Straws</name>
@@ -118,14 +120,14 @@
             will be blended into the drink due to oily substances contact (cream, etc.).<br />What
             You Get: 200 compostable bendy straws with the size of 8.25" * 0.25"(8 1/4 inch* 1/4
             inch). Suitable for most beverages, containers and different occasions.</description>
-        <image type="local">/001.png</image>
+        <image type="local">001.png</image>
 
         <stock>
-            <inventory inventoryId="INV01">
+            <inventory>
 
                 <productBarcode>1234567890123</productBarcode>
 
-                <quantity unit="pcs">500</quantity>
+                <quantity unit="Pcs">500</quantity>
 
                 <productionDate>2023-05-15</productionDate>
                 <expiryDate>2024-05-15</expiryDate>
@@ -137,11 +139,11 @@
 
             </inventory>
 
-            <inventory inventoryId="INV04">
+            <inventory>
 
                 <productBarcode>1234567890123</productBarcode>
 
-                <quantity unit="single">2</quantity>
+                <quantity unit="Pcs">2</quantity>
 
                 <productionDate>2023-04-10</productionDate>
                 <expiryDate>2024-04-10</expiryDate>
@@ -153,5 +155,6 @@
 
             </inventory>
         </stock>
+
     </product>
 </products>

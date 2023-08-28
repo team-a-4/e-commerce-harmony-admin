@@ -27,7 +27,7 @@
 
             <productBarcode>1234567890123</productBarcode>
 
-            <quantity unit="pcs">500</quantity>
+            <quantity unit="Pcs">500</quantity>
 
             <productionDate>2023-05-15</productionDate>
             <expiryDate>2024-05-15</expiryDate>
@@ -43,7 +43,7 @@
 
             <productBarcode>1234567890123</productBarcode>
 
-            <quantity unit="single">2</quantity>
+            <quantity unit="Pcs">2</quantity>
 
             <productionDate>2023-04-10</productionDate>
             <expiryDate>2024-04-10</expiryDate>
