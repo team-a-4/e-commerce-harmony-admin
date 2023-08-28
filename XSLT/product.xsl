@@ -69,7 +69,7 @@
                                 <button onclick="loadInventory({@productId});">New Inventory</button>
                             </div>
                             <div>
-                                <button onclick="location.href='/e-commerce-harmony-admin/PHP/addInventoryWithXML.php'">Upload xml</button>
+                                <button onclick="inventoryXMLSelection({@productId});">Upload xml</button>
                             </div>
                         </div>
                         <table role="grid">

@@ -24,7 +24,7 @@
         <inventory>
             <productBarcode>1234567890123</productBarcode>
 
-            <quantity unit="pcs">500</quantity>
+            <quantity unit="Pcs">500</quantity>
 
             <productionDate>2023-05-15</productionDate>
             <expiryDate>2024-05-15</expiryDate>
@@ -38,8 +38,8 @@
         <inventory>
             <productBarcode>1234567890125</productBarcode>
 
-            <quantity unit="pcs">1050</quantity>
-
+            <quantity unit="Pcs">1050</quantity>
+      
             <productionDate>2023-04-10</productionDate>
             <expiryDate>2024-04-10</expiryDate>
 
